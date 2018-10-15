@@ -6,7 +6,7 @@ Function bodies are kind of ok, I guess, but I need to make this example more ro
 
 ```haskell
 -- doubleMe is function name and everything that comes after it but before equals sign is argument
-doubleMe x = x + x 
+doubleMe x = x + x
 -- Then everything after the equals sign is the function body itself. This helps write concise one-line functions.
 -- Not really sure how to write more complex functions, yet.
 ```
