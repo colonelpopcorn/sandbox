@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-bound-input',
+  selector: 'bound-input',
   templateUrl: './bound-input.component.html',
   styleUrls: ['./bound-input.component.scss']
 })
