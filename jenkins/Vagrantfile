@@ -1,0 +1,15 @@
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.define "jenkins_derping"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+  script = <<-SCRIPT
+    wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+    sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+    sudo apt-get update -y
+    sudo apt-get install default-jre default-jdk -y
+    sudo apt-get install jenkins -y
+  SCRIPT
+  config.vm.provision "shell", inline: script
+end
