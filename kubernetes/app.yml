@@ -1,0 +1,49 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-example
+spec:
+  selector:
+    matchLabels:
+      app: nginx-example
+  template:
+    metadata:
+      labels:
+        app: nginx-example
+    spec:
+      containers:
+      - name: nginx-example
+        image: nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-example
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    app: nginx-example
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-example
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: nginx.minikube
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-example
+          servicePort: http
