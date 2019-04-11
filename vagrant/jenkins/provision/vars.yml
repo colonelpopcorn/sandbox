@@ -1,3 +1,0 @@
-jenkins_hostname: jenkins.deb
-jenkins_plugins: ["blueocean"]
-jenkins_plugins_state: latest

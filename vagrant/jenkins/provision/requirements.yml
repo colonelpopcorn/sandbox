@@ -1,5 +1,0 @@
-- name: java
-  src: geerlingguy.java
-
-- name: jenkins
-  src: geerlingguy.jenkins
