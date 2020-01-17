@@ -4,25 +4,10 @@ import (
     "fmt"
     "strings"
     "strconv"
-    "io/ioutil"
+    // ioutil "io/ioutil"
 )
 
 func main() {
-    /* 
-    // Day 1 test
-    data, err := ioutil.ReadFile("./day1.txt")
-    if err != nil {
-        fmt.Println("Failed! %s", err)
-        return
-    } else {
-        fmt.Println(Day1Part1(string(data)))
-        return
-    }   
-    // Day 2 test
-    data, _ := ioutil.ReadFile("./day1.txt")
-    fmt.Println(Day1Part2(string(data)))
-    return
-    */
 
 }
 
