@@ -6,3 +6,11 @@ export function format(first: string, middle: string, last: string): string {
     (last ? ` ${last}` : '')
   );
 }
+
+export function tryWithDefault<T>(func: () => T, defaultVal: T): T {
+  try {
+    return func();
+  } catch (e) {
+    return defaultVal;
+  }
+}

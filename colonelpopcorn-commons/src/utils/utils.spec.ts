@@ -1,4 +1,4 @@
-import { format } from './utils';
+import { format, tryWithDefault } from './utils';
 
 describe('format', () => {
   it('returns empty string for no names defined', () => {
@@ -17,5 +17,14 @@ describe('format', () => {
     expect(format('Joseph', 'Quincy', 'Publique')).toEqual(
       'Joseph Quincy Publique'
     );
+  });
+});
+
+describe('tryWithDefault', () => {
+  it('should make return a default value', () => {
+    const func = () => { throw new Error("asdghadfjkgadf"); }
+    const val = 'something';
+    const result = tryWithDefault<string>(func, val);
+    expect(result).toEqual(val);
   });
 });

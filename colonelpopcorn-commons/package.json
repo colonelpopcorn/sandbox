@@ -27,7 +27,20 @@
     "@types/puppeteer": "1.20.3",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
-    "puppeteer": "1.20.0"
+    "puppeteer": "1.20.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.2"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   },
   "license": "MIT"
 }
