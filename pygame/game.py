@@ -29,9 +29,11 @@ class SoulsBois(pg.sprite.Sprite):
         # get rect bois, lol
         self.area = screen.get_rect()
         self.rect.topleft = 10, 10
+        self.x_momentum = 0
+        self.y_momentum = 0
     
     def update(self):
-        self.rect.move_ip(2, 0)
+        self.rect.move_ip(self.x_momentum, self.y_momentum)
 
 
 def main():
@@ -59,6 +61,20 @@ def main():
         for event in pg.event.get():
             if event.type is pg.QUIT:
                 gameRunning = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_LEFT:
+                    soulsBois.x_momentum = -1
+                if event.key == pg.K_UP:
+                    soulsBois.y_momentum = -1
+                if event.key == pg.K_RIGHT:
+                    soulsBois.x_momentum = 1
+                if event.key == pg.K_DOWN:
+                    soulsBois.y_momentum = 1
+            if event.type == pg.KEYUP:
+                if event.key == pg.K_LEFT or event.key == pg.K_RIGHT:
+                    soulsBois.x_momentum = 0
+                if event.key == pg.K_UP or event.key == pg.K_DOWN:
+                    soulsBois.y_momentum = 0
         allsprites.update()
 
         screen.blit(background, (0, 0))
