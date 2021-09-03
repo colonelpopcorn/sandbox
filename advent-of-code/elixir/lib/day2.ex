@@ -39,12 +39,12 @@ defmodule Day2 do
 	end
 
 	def test_main do
-		{ :ok, input } = File.read("input/day2.txt")
+		{ :ok, input } = File.read("../../input/day2.txt")
 		main(input)
 	end
 
 	def test_secondary do
-		{ :ok, input } = File.read("input/day2.txt")
+		{ :ok, input } = File.read("../../input/day2.txt")
 		secondary(input)
 	end
 
