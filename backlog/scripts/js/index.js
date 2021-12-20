@@ -15,7 +15,7 @@ function generateInsertStatements() {
 }
 
 function fetchSteamGames() {
-  const steamApiKey = '97B51DF6CCB943AB836D0444348769D5';
+  const steamApiKey = process.env.STEAM_API_KEY || '';
   const steamId = '76561198003008735';
   const hostname = `api.steampowered.com`;
   const path = `/IPlayerService/GetOwnedGames/v0001/?key=${steamApiKey}&steamid=${steamId}&include_appinfo=true&format=json`;
