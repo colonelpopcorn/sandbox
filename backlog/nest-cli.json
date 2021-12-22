@@ -2,6 +2,9 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": [{ "include": "views/**/*", "watchAssets": true }]
+    "assets": [
+      { "include": "views/**/*", "watchAssets": true },
+      { "include": "public/**/*", "watchAssets": true }
+    ]
   }
 }
