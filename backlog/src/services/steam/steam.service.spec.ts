@@ -1,7 +1,6 @@
 import { HttpModule } from '@nestjs/axios';
-import { ConsoleLogger, Logger } from '@nestjs/common';
+import { ConsoleLogger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import exp from 'constants';
 import { firstValueFrom } from 'rxjs';
 import { SteamService } from './steam.service';
 
