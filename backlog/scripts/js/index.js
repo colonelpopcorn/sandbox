@@ -3,35 +3,6 @@ const https = require('https');
 const { HowLongToBeatService, HowLongToBeatEntry } = require('howlongtobeat');
 const readline = require('readline');
 
-
-function fetchTwitchData(gameName) {
-  const twitchClientId = process.env.TWITCH_CLIENT_ID || '';
-  const twitchClientSecret = process.env.TWITCH_CLIENT_SECRET || '';
-  const twitchTokenUrl = 'id.twitch.tv';
-  const twitchTokenPath = `/oauth2/token?client_id=${twitchClientId}&client_secret=${twitchClientSecret}&grant_type=client_credentials`;
-  const twitchApiUrl = 'api.igdb.com';
-  const twitchApiPath = `/v4/games`;
-  return httpsGet({
-    hostname: twitchTokenUrl,
-    port: 443,
-    method: 'POST',
-    path: twitchTokenPath,
-  }).then(({ access_token }) =>
-    httpsRequest({
-      hostname: twitchApiUrl,
-      port: 443,
-      method: 'POST',
-      path: `${twitchApiPath}`,
-      headers: {
-        'Client-ID': twitchClientId,
-        Authorization: `Bearer ${access_token}`,
-        'Content-Type': 'text/plain',
-      },
-      body: `fields *; where name = "${gameName}"*;`,
-    }),
-  );
-}
-
 function getGameInfo(game) {
   const gameName = game.name;
   const play_time = game.playtime_forever;
@@ -62,6 +33,55 @@ function getGameInfo(game) {
         });
       }),
   );
+}
+
+function httpsGet(options) {
+  return new Promise((resolve, reject) => {
+    https
+      .get(options, (res) => {
+        let body = '';
+        res.on('data', (chunk) => {
+          body += chunk;
+        });
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(body));
+          } catch (error) {
+            console.error(error.message);
+            reject(error);
+          }
+        });
+      })
+      .on('error', (error) => {
+        console.error(error.message);
+      });
+  });
+}
+
+function httpsRequest(options) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', (chunk) => {
+        body += chunk;
+      });
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(body));
+        } catch (error) {
+          console.error(error.message);
+          reject(error);
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      console.error(error);
+    });
+
+    req.write(options.body);
+    req.end();
+  });
 }
 
 function generateBacklogTableInsertStatementsAvoidingAPIRateLimits() {
@@ -117,4 +137,7 @@ function generateBacklogTableInsertStatements() {
   });
 }
 
-generateBacklogTableInsertStatements();
+// generateBacklogTableInsertStatements();
+
+fetchTwitchData("Mario")
+.then(res => console.log(res));

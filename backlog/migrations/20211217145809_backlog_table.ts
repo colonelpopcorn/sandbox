@@ -5,7 +5,8 @@ const TABLE_NAME = 'backlog';
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTableIfNotExists(TABLE_NAME, (tableBuilder) => {
     tableBuilder.bigIncrements('game_id', { primaryKey: true });
-    tableBuilder.integer('external_game_id').nullable();
+    tableBuilder.integer('igdb_game_id').notNullable().defaultTo(0);
+    tableBuilder.integer('store_game_id').nullable();
     tableBuilder.string('platform').notNullable().defaultTo('');
     tableBuilder.string('game_name').notNullable().defaultTo('');
     tableBuilder.integer('personal_weight').notNullable().defaultTo(1);
